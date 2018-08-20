@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +23,70 @@ namespace VasyanGames
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        ObservableCollection<Game> Games = new ObservableCollection<Game>();
         public MainWindow()
         {
             InitializeComponent();
-            Vasyan db = new Vasyan();
-            Genre g = new Genre() { NameGenre = "RPG" };
-            db.Genres.Add(g);
-            db.SaveChanges();
+            listbox1.ItemsSource = Games;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            flyoutsettings.IsOpen = true;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+            string genre = (sender as CheckBox).Content.ToString();
+
+            if(genre=="All")
+            {
+                Vasyan db = new Vasyan();
+                foreach(Game game in db.Games.ToList())
+                {
+                    Games.Add(game);
+                }
+            }
+            else 
+            {
+                Vasyan db = new Vasyan();
+                foreach (Game game in db.Games.Where(x=>x.Genre.NameGenre==genre).ToList())
+                {
+                    Games.Add(game);
+                }
+            }
+           
+        }
+
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+           // Games.Clear();
+            string genre = (sender as CheckBox).Content.ToString();
+
+            if (genre == "All")
+            {
+                //Vasyan db = new Vasyan();
+                //foreach (Game game in db.Games.ToList())
+                //{
+                //    Games.Add(game);
+                //}
+            }
+            else
+            {
+                Vasyan db = new Vasyan();
+                foreach (Game game in db.Games.Where(x => x.Genre.NameGenre == genre).ToList())
+                {
+                    Games.Remove(Games.FirstOrDefault(x => x.Name == game.Name));
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Process.Start((sender as Button).Tag.ToString());
+            
         }
     }
 }

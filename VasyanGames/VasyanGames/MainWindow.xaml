@@ -8,5 +8,30 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+       
+        <Button Click="Button_Click">settings</Button>
+        <ListBox Name="listbox1" Grid.Row="1" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5" Background="Red" Height="100">
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <TextBlock Text="{Binding Genre.NameGenre}"></TextBlock>
+                        <Button Tag="{Binding Path}" Click="Button_Click_1">Play</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Controls:Flyout Name="flyoutsettings" Grid.RowSpan="2" Header="Settings">
+            <StackPanel>
+                <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">All</CheckBox>
+                <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">RPG</CheckBox>
+                <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">Shooter</CheckBox>
+            </StackPanel>
+        </Controls:Flyout>
     </Grid>
 </Controls:MetroWindow>
