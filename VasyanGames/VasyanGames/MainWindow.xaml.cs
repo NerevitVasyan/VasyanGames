@@ -86,7 +86,33 @@ namespace VasyanGames
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Process.Start((sender as Button).Tag.ToString());
-            
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            flyoutsettings.IsOpen = false;
+          
+
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var list = Games.OrderByDescending(x => x.Score).ToList();
+            Games.Clear();
+            foreach(var game in list)
+            {
+                Games.Add(game);
+            }
+        }
+
+        private void ToggleButton_Unchecked_1(object sender, RoutedEventArgs e)
+        {
+            var list = Games.OrderBy(x => x.Score).ToList();
+            Games.Clear();
+            foreach (var game in list)
+            {
+                Games.Add(game);
+            }
         }
     }
 }

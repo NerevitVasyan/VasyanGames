@@ -10,8 +10,8 @@ namespace VasyanGames
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Year { get; set; }
-        public int Score { get; set; }
+        public int? Year { get; set; }
+        public int? Score { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
 

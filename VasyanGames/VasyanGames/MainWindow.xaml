@@ -12,21 +12,19 @@
             <RowDefinition Height="30" />
             <RowDefinition/>
         </Grid.RowDefinitions>
-       
-        <Button Click="Button_Click">settings</Button>
-        <ListBox Name="listbox1" Grid.Row="1" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5" Background="Red" Height="100">
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                        <TextBlock Text="{Binding Genre.NameGenre}"></TextBlock>
-                        <Button Tag="{Binding Path}" Click="Button_Click_1">Play</Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton Unchecked="ToggleButton_Unchecked_1" Checked="ToggleButton_Checked">Top First</ToggleButton>
+            <ToggleButton Grid.Column="1" Style="{StaticResource ResourceKey=AccentedSquareButtonStyle}" Checked="Button_Click" Unchecked="ToggleButton_Unchecked">Search</ToggleButton>
+        </Grid>
+       <ListBox Name="listbox1" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource ResourceKey=GamesTemplate}">
+            
         </ListBox>
 
-        <Controls:Flyout Name="flyoutsettings" Grid.RowSpan="2" Header="Settings">
+        <Controls:Flyout Name="flyoutsettings" Background="{DynamicResource ResourceKey=HighlightBrush}" Grid.RowSpan="2" Header="Search">
             <StackPanel>
                 <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">All</CheckBox>
                 <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">RPG</CheckBox>
