@@ -18,18 +18,35 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <ToggleButton Unchecked="ToggleButton_Unchecked_1" Checked="ToggleButton_Checked">Top First</ToggleButton>
-            <ToggleButton Grid.Column="1" Style="{StaticResource ResourceKey=AccentedSquareButtonStyle}" Checked="Button_Click" Unchecked="ToggleButton_Unchecked">Search</ToggleButton>
+            <ToggleButton Name="ToggleSearch" Grid.Column="1" Style="{StaticResource ResourceKey=AccentedSquareButtonStyle}" Checked="Button_Click" Unchecked="ToggleButton_Unchecked">Search</ToggleButton>
         </Grid>
        <ListBox Name="listbox1" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource ResourceKey=GamesTemplate}">
             
         </ListBox>
 
-        <Controls:Flyout Name="flyoutsettings" Background="{DynamicResource ResourceKey=HighlightBrush}" Grid.RowSpan="2" Header="Search">
-            <StackPanel>
+        <Controls:Flyout Name="flyoutsettings" Background="{DynamicResource ResourceKey=HighlightBrush}" Grid.RowSpan="2" Header="Search" Width="200" LostFocus="flyoutsettings_LostFocus">
+            <ScrollViewer>
+                <StackPanel>
+                    <GroupBox Padding="5" Header="Genres" Margin="2">
+                        <StackPanel Name="StackGenres">
+                            <CheckBox Checked="AllGenresCheck">All</CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Padding="5" Header="Producers" Margin="2">
+                        <StackPanel Name="StackProducers">
+                            <CheckBox Checked="AllGenresCheck">All</CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+            
+           
+
+            <!--<StackPanel>
                 <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">All</CheckBox>
                 <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">RPG</CheckBox>
                 <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked">Shooter</CheckBox>
-            </StackPanel>
+            </StackPanel>-->
         </Controls:Flyout>
     </Grid>
 </Controls:MetroWindow>

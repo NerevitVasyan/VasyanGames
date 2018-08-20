@@ -24,9 +24,35 @@ namespace VasyanGames
     public partial class MainWindow : MetroWindow
     {
         ObservableCollection<Game> Games = new ObservableCollection<Game>();
+        List<string> GenreNames = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
+
+
+            //Add Genres
+            using (Vasyan db = new Vasyan())
+            {
+                foreach (var genre in db.Genres.ToList())
+                {
+                    CheckBox ch = new CheckBox();
+                    ch.Content = genre.NameGenre;
+                    ch.Checked += CheckBox_Checked;
+                    ch.Unchecked += CheckBox_Unchecked;
+                    StackGenres.Children.Add(ch);
+                }
+
+                foreach (var prod in db.Producers.ToList())
+                {
+                    CheckBox ch = new CheckBox();
+                    ch.Content = prod.NameProducer;
+                    ch.Checked += CheckBox_Checked;
+                    ch.Unchecked += CheckBox_Unchecked;
+                    StackProducers.Children.Add(ch);
+                }
+            }
+            
+
             listbox1.ItemsSource = Games;
         }
 
@@ -113,6 +139,29 @@ namespace VasyanGames
             {
                 Games.Add(game);
             }
+        }
+
+        private void AllGenresCheck(object sender, RoutedEventArgs e)
+        {
+            foreach(var ch in StackGenres.Children)
+            {
+                (ch as CheckBox).IsChecked = true;
+            }
+        }
+
+        int flyoutfocus = 0;
+
+        private void flyoutsettings_LostFocus(object sender, RoutedEventArgs e)
+        {
+            flyoutfocus++;
+
+            if(flyoutfocus==2)
+            {
+                (sender as Flyout).IsOpen = false;
+                flyoutfocus = 0;
+                
+            }
+            
         }
     }
 }
