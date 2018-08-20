@@ -23,6 +23,10 @@ namespace VasyanGames
         public MainWindow()
         {
             InitializeComponent();
+            Vasyan db = new Vasyan();
+            Genre g = new Genre() { NameGenre = "RPG" };
+            db.Genres.Add(g);
+            db.SaveChanges();
         }
     }
 }

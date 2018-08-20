@@ -66,7 +66,7 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Producer.cs" />
-    <Compile Include="Vasyan.cs" />
+    <Compile Include="VasyanGames.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
